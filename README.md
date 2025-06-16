@@ -1,6 +1,6 @@
 # CN - LAB ASSIGNMENTS
 ## WEEK-1 
-1. basic Networking Commands
+1. Basic Networking Commands
 
 ## WEEK-2
 2. Study of different types of network cables and practically implementing the cross wired cable and straight through cable using clamping tool.
