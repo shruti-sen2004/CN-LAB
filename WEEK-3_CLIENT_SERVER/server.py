@@ -32,7 +32,7 @@ with client_socket:    # will close both client and server sockets
             break
         print("Recieved from client: ", data)
 
-        # response baack to client
+        # response back to client
         response = input("Enter a response: ")
         client_socket.sendall(response.encode())
         if response.lower()=="exit":
