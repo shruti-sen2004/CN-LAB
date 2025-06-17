@@ -8,10 +8,11 @@ client_socket.connect((host, port))
 
 while True:
     message = input("Type message: ")
-    client_socket.send(message.encode())
+    client_socket.sendall(message.encode()) # ensures all messages are sent 
     if message.lower() == 'exit':
         break
-    data = client_socket.recv(1024).decode()
+    
+    data = client_socket.recv(1024).decode() # receives and decodes response from server 
     print("Received from server: ", data)
 
 client_socket.close()

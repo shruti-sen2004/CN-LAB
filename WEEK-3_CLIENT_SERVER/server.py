@@ -31,4 +31,10 @@ with client_socket:    # will close both client and server sockets
             print("Client has exited the connection.")
             break
         print("Recieved from client: ", data)
-        client_socket.send(data.encode())
+
+        # response baack to client
+        response = input("Enter a response: ")
+        client_socket.sendall(response.encode())
+        if response.lower()=="exit":
+            break
+            
