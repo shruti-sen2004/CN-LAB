@@ -11,13 +11,24 @@ print("Server is listening on port: ", port)
 client_socket, client_address = server_socket.accept()
 print("Connection from: ", client_address)
 
-while True:
-    data = client_socket.recv(1024).decode()
-    if data.lower() == 'exit':
-        print("Client has exited the connection.")
-        break
-    print("Recieved from client: ", data)
-    client_socket.send(data.encode())
+# Method-1
+# while True:
+#     data = client_socket.recv(1024).decode()
+#     if data.lower() == 'exit':
+#         print("Client has exited the connection.")
+#         break
+#     print("Recieved from client: ", data)
+#     client_socket.send(data.encode())
 
-client_socket.close()
-server_socket.close()
+# client_socket.close()
+# server_socket.close()
+
+# Method-2
+with client_socket:    # will close both client and server sockets 
+    while True:
+        data = client_socket.recv(1024).decode()
+        if data.lower() == 'exit':
+            print("Client has exited the connection.")
+            break
+        print("Recieved from client: ", data)
+        client_socket.send(data.encode())
