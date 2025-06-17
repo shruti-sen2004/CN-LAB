@@ -5,7 +5,7 @@ import time
 sender_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 receiver_address = ('localhost', 12345)
 
-sender_socket.settimeout(2)
+sender_socket.settimeout(2) # time out of 2 sec
 
 data_packets = ['Packet1', 'Packet2', 'Packet3']
 seq_num = 0
@@ -17,6 +17,8 @@ for packet in data_packets:
         sender_socket.sendto(message.encode(), receiver_address)
         print(f"Sent: {message}")
         try:
+            # _ is used for variables that will store values that
+            # are never used
             ack, _ = sender_socket.recvfrom(1024)
             ack = ack.decode()
             if ack == f"ACK{seq_num}":
