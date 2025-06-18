@@ -10,14 +10,17 @@ def detect_errors(sc, rc):   #Detects 1-bit and 2-bit errors in a received Hammi
     p2 = rc[1] ^ rc[2] ^ rc[5] ^ rc[6]
     p3 = rc[3] ^ rc[4] ^ rc[5] ^ rc[6]
     
-    err_pos = p1 + (p2 << 1) + (p3 << 2)
+    err_pos = p1 + (p2 * 2) + (p3 * 4)
     
     if rc == sc:
         return "No error detected."
     elif 1 <= err_pos <= 7:
         rc[err_pos-1] = 1 - rc[err_pos-1]
-        new_rc = int(''.join(map(str, rc)))
-        return f"Single-bit error detected at position {err_pos}\nCorrected received code is {new_rc}"
+        if rc == sc :
+            new_rc = int(''.join(map(str, rc)))
+            return f"Single-bit error detected at position {err_pos}\nCorrected received code is {new_rc}"
+        else:
+            return "Two-bit error detected or uncorrectable error."
     else:
         return "Two-bit error detected or uncorrectable error."
 
